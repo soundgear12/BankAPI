@@ -6,11 +6,10 @@ import java.util.*;
 public abstract class BankAccount {
 
     // region instance variables
-	int id;
-	int nextId = 1;
-    private final Date accountOpenedOn;
-    private final Long accountNumber;
-    private final double interestRate;
+
+    private Date accountOpenedOn;
+    private Long accountNumber;
+    private double interestRate;
     private double balance;
  
     // endregion
@@ -20,29 +19,46 @@ public abstract class BankAccount {
         this(MeritBank.getNextAccountNumber(), balance, interestRate, new Date());
     }
 
-    BankAccount(double balance, double interestRate, Date accountOpenedOn){
+    BankAccount(double balance, double interestRate, Date accountOpenedOn) {
         this(MeritBank.getNextAccountNumber(), balance, interestRate, accountOpenedOn);
     }
 
-    protected BankAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn){
-        this.id = nextId++;
+    protected BankAccount(long accountNumber, double balance, double interestRate, Date accountOpenedOn) {
     	this.accountNumber = accountNumber;
         this.balance = balance;
         this.interestRate = interestRate;
         this.accountOpenedOn = accountOpenedOn;
     }
     // endregion
+    
+    BankAccount() {
+    	this.accountNumber = MeritBank.getNextAccountNumber();
+        this.balance = 0;
+        this.interestRate = 0;
+        this.accountOpenedOn = new Date();
+    }
 
-    public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
 
 	// region getters/setters
-    public long getAccountNumber() { return this.accountNumber; }
+    
+    
+    public void setAccountOpenedOn(Date accountOpenedOn) {
+		this.accountOpenedOn = accountOpenedOn;
+	}
+
+	public void setAccountNumber(Long accountNumber) {
+		this.accountNumber = accountNumber;
+	}
+
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
+	}
+
+	public void setBalance(double balance) {
+		this.balance = balance;
+	}
+
+	public long getAccountNumber() { return this.accountNumber; }
 
     public double getBalance() { return this.balance; }
 
@@ -67,6 +83,11 @@ public abstract class BankAccount {
             return true;
         }
     }
+
+	public double futureValue(int term) {
+		double factor = 1 + interestRate;
+		return Math.pow(factor, term) * balance;
+	}
 
 
 

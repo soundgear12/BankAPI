@@ -12,5 +12,7 @@ public class SavingsAccount extends BankAccount {
         super(accountNumber, balance, interestRate, date);
     }
 
-    
+    public SavingsAccount() {
+    	super();
+    }
 }

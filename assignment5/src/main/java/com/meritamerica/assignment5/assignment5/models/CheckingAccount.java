@@ -12,6 +12,9 @@ public class CheckingAccount extends BankAccount {
         super(accountNumber, balance, interestRate, date);
     }
     
+    public CheckingAccount() {
+    	super();
+    }
 
    
 }

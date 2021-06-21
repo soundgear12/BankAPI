@@ -5,8 +5,8 @@ public class CDOfferings {
 
 	int id;
 
-    private final int term;
-    private final double interestRate;
+    private int term;
+    private double interestRate;
 
     public CDOfferings(int term, double interestRate) {
         this.term = term;
@@ -25,6 +25,14 @@ public class CDOfferings {
     
     public int getId() {
 		return id;
+	}
+
+	public void setTerm(int term) {
+		this.term = term;
+	}
+
+	public void setInterestRate(double interestRate) {
+		this.interestRate = interestRate;
 	}
 
 	public void setId(int id) {

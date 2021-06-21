@@ -6,25 +6,36 @@ import java.util.Date;
 
 public class CDAccount extends BankAccount {
 
-    private final CDOfferings offering;
+    private CDOfferings cdOffering;
 
     public CDAccount(CDOfferings offering, double balance) {
         super(balance, offering.getInterestRate(), new Date());
-        this.offering = offering;
+        this.cdOffering = offering;
     }
 
     private CDAccount(long accountNumber, double balance, double interestRate, int term, Date date) {
         super(accountNumber, balance, interestRate, date);
-        this.offering = new CDOfferings(term, interestRate);
+        this.cdOffering = new CDOfferings(term, interestRate);
     }
     
+    public CDAccount() {
+    	super();
+    }
     
 
-    public int getTerm() { return this.offering.getTerm(); }
+    public CDOfferings getCdOffering() {
+		return cdOffering;
+	}
+
+	public void setCdOffering(CDOfferings offering) {
+		this.cdOffering = offering;
+	}
+
+	//public int getTerm() { return this.cdOffering.getTerm(); }
 
     
 
-    public double futureValue(){ return super.futureValue(this.offering.getTerm()); }
+   // public double futureValue(){ return super.futureValue(this.cdOffering.getTerm()); }
 
     
 

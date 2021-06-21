@@ -49,7 +49,7 @@ public class MeritBank {
 	public static CheckingAccount getCheckingAccount (int id) {
 		for (int i = 0; i < achs.size(); i++) {
 			for (int j =0; j <chks.size(); j++) {
-				if (chks.get(i).getId() == id) {
+				if (chks.get(i).getAccountNumber() == id) {
 					return chks.get(i);
 				}
 			}
@@ -60,7 +60,7 @@ public class MeritBank {
 	public static SavingsAccount getSavingsAccount (int id) {
 		for (int i = 0; i < achs.size(); i++) {
 			for (int j =0; j <svgs.size(); j++) {
-				if (svgs.get(i).getId() == id) {
+				if (svgs.get(i).getAccountNumber() == id) {
 					return svgs.get(i);
 				}
 			}
@@ -71,7 +71,7 @@ public class MeritBank {
 	public static CDAccount getCDAccount (int id) {
 		for (int i = 0; i < achs.size(); i++) {
 			for (int j =0; j <cdas.size(); j++) {
-				if (cdas.get(i).getId() == id) {
+				if (cdas.get(i).getAccountNumber() == id) {
 					return cdas.get(i);
 				}
 			}
@@ -96,10 +96,10 @@ public class MeritBank {
 		return achs;
 	}
 	
-	/*public static AccountHolder[]  sortAccountHolders() {
-		Arrays.sort(accountHolders);
+	public static ArrayList<AccountHolder>  sortAccountHolders() {
+		Arrays.asList(accountHolders);
 		return accountHolders;
-	}*/
+	}
 
 	
 	public static List<CheckingAccount> getCheckingAccounts() {
@@ -121,13 +121,14 @@ public class MeritBank {
 	}
 	
 	public static void clearCDOfferings() {
-		cdOffering = null;
+		cdos = null;
 	}
 	
+	/*
 	static CDOfferings getBestCDOffering(double depositAmount) {
 		double bestIR = -1;
 		CDOfferings bestCDO = null;
-		for (int i = 0; i < cdOffering.length; i++) {
+		for (int i = 0; i < CDOfferings.nextId; i++) {
 			CDOfferings cdo = cdOffering[i];
 			double interestRate = cdo.getInterestRate();
 			if (interestRate > bestIR) {
@@ -135,13 +136,13 @@ public class MeritBank {
 				bestCDO = cdo;
 			}
 		}
-		return bestCDO;
-	}
+	}	
+				
 	static CDOfferings getSecondBestCDOffering(double depositAmount) {
 		double bestIR = -1;
 		CDOfferings secondCDO = null; 
 		CDOfferings bestCDO = null;
-		for (int i = 0; i < cdOffering.length; i++) {
+		for (int i = 0; i < cdOfferings.nextId; i++) {
 			CDOfferings cdo = cdOffering[i];
 			double interestRate = cdo.getInterestRate();
 			if (interestRate > bestIR) {
@@ -152,7 +153,7 @@ public class MeritBank {
 		}
 		return secondCDO;
 	}
-
+	*/
 	
 	public static void main(String[] args) {
 		
@@ -178,8 +179,8 @@ public class MeritBank {
 	
 	static double totalBalances() {
 		double CombinedBalance = 0;
-		for (int i = 0; i < accountHolders.length; i++) {
-			AccountHolder accHolder = accountHolders[i];
+		for (int i = 0; i < achs.size(); i++) {
+			AccountHolder accHolder = achs.get(i);
 			CombinedBalance = CombinedBalance + accHolder.getCombinedBalance();
 		}
 		return CombinedBalance;

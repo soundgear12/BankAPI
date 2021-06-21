@@ -19,11 +19,11 @@ public class AccountHolder {
     private  CDAccount[] cdAccounts;
     private CDOfferings[] cdOfferings;
     int numberOfCheckingAccounts = 0;
-    double checkingBalance = 0;
+    
 	int numberOfSavingsAccounts = 0;
-	double savingsBalance = 0;
+	
 	int numberOfCDAccounts = 0;
-	double cdBalance = 0;
+
 	double combinedBalance = 0;
     private final double MAX_NEW_ACCOUNT_BALANCE = 250000.0;
     //endregion
@@ -36,11 +36,8 @@ public class AccountHolder {
         this.lastName = "";
         this.ssn = "";
         this.checkingAccounts = new CheckingAccount[0];
-        this.checkingBalance = 0;
-		savingsAccounts = new SavingsAccount[0];
-		this.savingsBalance = 0;
-		cdAccounts = new CDAccount[0];
-		this.cdBalance = 0;
+		this.savingsAccounts = new SavingsAccount[0];
+		this.cdAccounts = new CDAccount[0];
 		this.combinedBalance = 0;
     }
     //endregion
@@ -105,14 +102,17 @@ public class AccountHolder {
 
 
 	public double getCheckingBalance() {
-		return checkingBalance;
+		double chkBal = 0;
+		for (int i = 0; i < checkingAccounts.length; i++) {
+			
+			chkBal += checkingAccounts[i].getBalance();
+		}
+		return chkBal;
 	}
 
 
 
-	public void setCheckingBalance(double checkingBalance) {
-		this.checkingBalance = checkingBalance;
-	}
+
 
 
 
@@ -129,14 +129,17 @@ public class AccountHolder {
 
 
 	public double getSavingsBalance() {
-		return savingsBalance;
+		double svgBal = 0;
+		for (int i = 0; i < savingsAccounts.length; i++) {
+			
+			svgBal += savingsAccounts[i].getBalance();
+		}
+		return svgBal;
 	}
 
 
 
-	public void setSavingsBalance(double savingsBalance) {
-		this.savingsBalance = savingsBalance;
-	}
+
 
 
 
@@ -153,14 +156,15 @@ public class AccountHolder {
 
 
 	public double getCdBalance() {
-		return cdBalance;
+		double cdaBal = 0;
+		for (int i = 0; i < cdAccounts.length; i++) {
+			
+			cdaBal += cdAccounts[i].getBalance();
+		}
+		return cdaBal;
 	}
 
 
-
-	public void setCdBalance(double cdBalance) {
-		this.cdBalance = cdBalance;
-	}
 
 
 
@@ -210,14 +214,14 @@ public class AccountHolder {
 	
 	}
 	
-	public  CheckingAccount addCheckingAccount(CheckingAccount checkingAccount) {
+	public  CheckingAccount addCheckingAccount(CheckingAccount chk) {
 			CheckingAccount[] temp = Arrays.copyOf(checkingAccounts, checkingAccounts.length + 1);
-			temp[temp.length - 1] = checkingAccount;
+			temp[temp.length - 1] = chk;
 			checkingAccounts = temp;
-		return checkingAccount;
-
-   
+		return chk;   
     }
+	
+
 	
 
 	
